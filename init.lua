@@ -92,44 +92,8 @@ vim.g.maplocalleader = ' '
 
 vim.g.have_nerd_font = true
 
-local map = vim.api.nvim_set_keymap
 -- [[ Setting options ]]
 -- See `:help vim.opt`
-local remappings = {
-  -- Normal mode remappings
-
-  { 'n', 'j', 'e' }, -- jump end word (swap e)
-  { 'n', 'N', 'K' }, -- help (swap K)
-  { 'n', 'n', 'j' }, -- down (swap j)
-  { 'n', 'E', 'J' }, -- join lines (swap J)
-  { 'n', 'e', 'l' }, -- right (swap l)
-  { 'n', 'K', 'N' }, -- ok prev find (swap N)
-  { 'n', 'k', 'n' }, -- ok next find (swap n)
-  { 'n', 'H', 'H' }, -- no change
-  { 'n', 'h', 'h' }, -- no change
-  { 'n', 'L', 'L' }, -- no change
-  { 'n', 'l', 'k' }, -- up (swap k)
-
-  -- Visual mode remappings
-  { 'v', 'J', 'E' },
-  { 'v', 'j', 'e' },
-  { 'v', 'N', 'K' },
-  { 'v', 'n', 'j' },
-  { 'v', 'E', 'J' },
-  { 'v', 'e', 'l' },
-  { 'v', 'K', 'N' },
-  { 'v', 'k', 'n' },
-  { 'v', 'H', 'H' }, -- no change
-  { 'v', 'h', 'h' }, -- no change
-  { 'v', 'L', 'L' }, -- no change
-  { 'v', 'l', 'k' },
-}
-
--- Apply the remappings
-for _, mapping in ipairs(remappings) do
-  map(mapping[1], mapping[2], mapping[3], opts)
-end
--- [[ Setting options ]]
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -140,9 +104,6 @@ vim.opt.mouse = 'a'
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -184,7 +145,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -218,6 +179,42 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Colemak remappings
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+local remappings = {
+  -- Normal mode remappings
+  { 'n', 'j', 'e' }, -- jump end word (swap e)
+  { 'n', 'N', 'K' }, -- help (swap K)
+  { 'n', 'n', 'j' }, -- down (swap j)
+  { 'n', 'E', 'J' }, -- join lines (swap J)
+  { 'n', 'e', 'l' }, -- right (swap l)
+  { 'n', 'K', 'N' }, -- ok prev find (swap N)
+  { 'n', 'k', 'n' }, -- ok next find (swap n)
+  { 'n', 'H', 'H' }, -- no change
+  { 'n', 'h', 'h' }, -- no change
+  { 'n', 'L', 'L' }, -- no change
+  { 'n', 'l', 'k' }, -- up (swap k)
+  -- Visual mode remappings
+  { 'v', 'J', 'E' },
+  { 'v', 'j', 'e' },
+  { 'v', 'N', 'K' },
+  { 'v', 'n', 'j' },
+  { 'v', 'E', 'J' },
+  { 'v', 'e', 'l' },
+  { 'v', 'K', 'N' },
+  { 'v', 'k', 'n' },
+  { 'v', 'H', 'H' }, -- no change
+  { 'v', 'h', 'h' }, -- no change
+  { 'v', 'L', 'L' }, -- no change
+  { 'v', 'l', 'k' },
+}
+
+-- Apply the remappings
+for _, mapping in ipairs(remappings) do
+  map(mapping[1], mapping[2], mapping[3], opts)
+end
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
