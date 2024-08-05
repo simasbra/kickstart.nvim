@@ -90,19 +90,48 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
+local map = vim.api.nvim_set_keymap
 -- [[ Setting options ]]
 -- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
+local remappings = {
+  -- Normal mode remappings
 
--- Make line numbers default
+  { 'n', 'j', 'e' }, -- jump end word (swap e)
+  { 'n', 'N', 'K' }, -- help (swap K)
+  { 'n', 'n', 'j' }, -- down (swap j)
+  { 'n', 'E', 'J' }, -- join lines (swap J)
+  { 'n', 'e', 'l' }, -- right (swap l)
+  { 'n', 'K', 'N' }, -- ok prev find (swap N)
+  { 'n', 'k', 'n' }, -- ok next find (swap n)
+  { 'n', 'H', 'H' }, -- no change
+  { 'n', 'h', 'h' }, -- no change
+  { 'n', 'L', 'L' }, -- no change
+  { 'n', 'l', 'k' }, -- up (swap k)
+
+  -- Visual mode remappings
+  { 'v', 'J', 'E' },
+  { 'v', 'j', 'e' },
+  { 'v', 'N', 'K' },
+  { 'v', 'n', 'j' },
+  { 'v', 'E', 'J' },
+  { 'v', 'e', 'l' },
+  { 'v', 'K', 'N' },
+  { 'v', 'k', 'n' },
+  { 'v', 'H', 'H' }, -- no change
+  { 'v', 'h', 'h' }, -- no change
+  { 'v', 'L', 'L' }, -- no change
+  { 'v', 'l', 'k' },
+}
+
+-- Apply the remappings
+for _, mapping in ipairs(remappings) do
+  map(mapping[1], mapping[2], mapping[3], opts)
+end
+-- [[ Setting options ]]
 vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
