@@ -147,6 +147,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -808,6 +810,6 @@ require('lazy').setup {
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 }
 
-vim.cmd 'colorscheme nordfox'
+vim.cmd.colorscheme 'nordfox'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
